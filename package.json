@@ -1,0 +1,26 @@
+{
+    "author": "alekoz47",
+    "dependencies": {},
+    "keywords": [],
+    "name": "firstface",
+    "pebble": {
+        "displayName": "First Watchface",
+        "enableMultiJS": true,
+        "messageKeys": [],
+        "projectType": "rocky",
+        "resources": {
+            "media": []
+        },
+        "sdkVersion": "3",
+        "targetPlatforms": [
+            "basalt",
+            "chalk"
+        ],
+        "uuid": "00ff2603-d660-4514-aa47-4077d17604ad",
+        "watchapp": {
+            "hiddenApp": true,
+            "watchface": true
+        }
+    },
+    "version": "0.1.0"
+}
