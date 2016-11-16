@@ -5,6 +5,12 @@
 //Require:
 
 var rocky = require('rocky');
+var months = ["January", "February",
+			  "March", "April",
+			  "May", "June",
+			  "July", "August",
+			  "September", "October",
+			  "November", "December"];
 
 //================================
 //Functions:
@@ -44,6 +50,7 @@ function chooseWidth(ctx, hand) {
 rocky.on('draw', function(event) {
 	var ctx = event.context;
 	var d = new Date();
+	var dateString =  d.getDate().toString() + " " + months[d.getMonth()] + " " + d.getFullYear().toString();
 	var w = ctx.canvas.unobstructedWidth;
 	var h = ctx.canvas.unobstructedHeight;
 	var cx = w / 2;
@@ -56,6 +63,10 @@ rocky.on('draw', function(event) {
 	var hourFraction = (d.getHours() % 12 + minuteFraction) / 12;
 	var hourAngle = fractionToRadian(hourFraction);
 	ctx.clearRect(0, 0, ctx.canvas.clientWidth, ctx.canvas.clientHeight);
+	ctx.fillStyle = 'red';
+	ctx.textAlign = 'center';
+	ctx.font = '14px Arial';
+	ctx.fillText(dateString, w / 2, h / 2);
 	drawHand(ctx, cx, cy, secondAngle, maxLength, "white", "second");
 	drawHand(ctx, cx, cy, minuteAngle, maxLength, "red", "minute");
 	drawHand(ctx, cx, cy, hourAngle, maxLength * 0.6, "red", "hour");
