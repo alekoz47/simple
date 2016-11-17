@@ -30,6 +30,12 @@ function drawHand(ctx, cx, cy, angle, length, color, hand) {
 	ctx.stroke();
 }
 
+/*
+function drawTick(ctx, cx, cy, color) {
+	ctx.lineWidth = 4;
+}
+*/
+
 function chooseWidth(ctx, hand) {
 	switch(hand) {
 		case "minute":
