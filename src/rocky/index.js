@@ -32,9 +32,6 @@ function drawHand(ctx, cx, cy, angle, length, color, hand) {
 
 function chooseWidth(ctx, hand) {
 	switch(hand) {
-		case "second":
-			ctx.lineWidth = 4;
-			break;
 		case "minute":
 			ctx.lineWidth = 6;
 			break;
@@ -56,8 +53,6 @@ rocky.on('draw', function(event) {
 	var cx = w / 2;
 	var cy = h / 2;
 	var maxLength = (Math.min(w, h) - 20) / 2;
-	var secondFraction = (d.getSeconds()) / 60;
-	var secondAngle = fractionToRadian(secondFraction);
 	var minuteFraction = (d.getMinutes()) / 60;
 	var minuteAngle = fractionToRadian(minuteFraction);
 	var hourFraction = (d.getHours() % 12 + minuteFraction) / 12;
@@ -67,11 +62,10 @@ rocky.on('draw', function(event) {
 	ctx.textAlign = 'center';
 	ctx.font = '14px Arial';
 	ctx.fillText(dateString, w / 2, h / 2);
-	drawHand(ctx, cx, cy, secondAngle, maxLength, "white", "second");
 	drawHand(ctx, cx, cy, minuteAngle, maxLength, "red", "minute");
 	drawHand(ctx, cx, cy, hourAngle, maxLength * 0.6, "red", "hour");
 });
 
-rocky.on('secondchange', function(event) {
+rocky.on('minutechange', function(event) {
 	rocky.requestDraw();
 });
