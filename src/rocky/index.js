@@ -30,27 +30,7 @@ function drawHand(ctx, cx, cy, angle, length, color, hand) {
 	ctx.stroke();
 }
 
-/*
-function drawTicks(ctx, cx, cy, length, color) {
-	ctx.lineWidth = 4;
-	ctx.strokeStyle = color;
-	for (var ii = 0; ii < 360; ii += 10) {
-		var jj = fractionToRadian(ii / 360);
-		var x2 = cx + Math.sin(jj) * length;
-		var y2 = cx - Math.cos(jj) * length;
-		length *= 0.2;
-		var x1 = x2 - Math.sin(jj) * length;
-		var y1 = y2 + Math.cos(jj) * length;
-		ctx.beginPath();
-		ctx.moveTo(x2, y2);
-		ctx.lineTo(x1, y1);
-		ctx.stroke();
-	}
-}
-*/
-
-
-function drawTicks(ctx, x2, y2, angle, length, color) {
+function drawTick(ctx, x2, y2, angle, length, color) {
 	ctx.lineWidth = 4;
 	ctx.strokeStyle = color;
 	var x1 = x2 - Math.sin(angle) * length;
@@ -60,7 +40,6 @@ function drawTicks(ctx, x2, y2, angle, length, color) {
 	ctx.lineTo(x1, y1);
 	ctx.stroke();
 }
-
 
 function chooseWidth(ctx, hand) {
 	switch(hand) {
@@ -96,15 +75,12 @@ rocky.on("draw", function(event) {
 	ctx.fillText(dateString, w / 2, h / 2);
 	drawHand(ctx, cx, cy, minuteAngle, maxLength, "red", "minute");
 	drawHand(ctx, cx, cy, hourAngle, maxLength * 0.6, "red", "hour");
-	
 	for (var ii = 0; ii < 360; ii += 30) {
 		var jj = fractionToRadian(ii / 360);
 		var x2 = cx + Math.sin(jj) * maxLength;
 		var y2 = cx - Math.cos(jj) * maxLength;
-		drawTicks(ctx, x2, y2, jj, maxLength * 0.2, "darkgrey");
+		drawTick(ctx, x2, y2, jj, maxLength * 0.1, "darkgrey");
 	}
-	
-	//drawTicks(ctx, cx, cy, maxLength, "darkgrey");
 });
 
 rocky.on("minutechange", function(event) {

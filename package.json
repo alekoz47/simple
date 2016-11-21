@@ -2,9 +2,9 @@
     "author": "alekoz47",
     "dependencies": {},
     "keywords": [],
-    "name": "firstface",
+    "name": "simple",
     "pebble": {
-        "displayName": "First Watchface",
+        "displayName": "Simple",
         "enableMultiJS": true,
         "messageKeys": [],
         "projectType": "rocky",
@@ -13,7 +13,6 @@
         },
         "sdkVersion": "3",
         "targetPlatforms": [
-            "basalt",
             "chalk"
         ],
         "uuid": "00ff2603-d660-4514-aa47-4077d17604ad",
@@ -22,5 +21,5 @@
             "watchface": true
         }
     },
-    "version": "0.1.0"
+    "version": "1.0.0"
 }
