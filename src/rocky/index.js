@@ -49,7 +49,7 @@ function drawTick(ctx, ex, ey, angle, length, color) {
 function drawText(ctx, cx, date, length) {
 	ctx.fillStyle = "white";
 	ctx.textAlign = "center";
-	ctx.font = "28px Droid";
+	ctx.font = "18px bold Gothic";
 	ctx.fillText(date.getDate().toString(), cx, length);
 }
 
@@ -104,9 +104,9 @@ rocky.on("draw", function(event) {
 	
 	drawText(ctx, cx, d, maxLength * 0.3);
 	
-	drawHand(ctx, cx, cy, minuteAngle, maxLength * 0.9, "minute");
+	drawHand(ctx, cx, cy, minuteAngle, maxLength * 0.8, "minute");
 	
-	drawHand(ctx, cx, cy, hourAngle, maxLength * 0.6, "hour");
+	drawHand(ctx, cx, cy, hourAngle, maxLength * 0.5, "hour");
 	
 	drawCenter(ctx, cx, cy);
 });
