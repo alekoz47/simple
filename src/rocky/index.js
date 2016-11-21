@@ -14,14 +14,14 @@ function fractionToRadian(fraction) {
 }
 
 function drawHand(ctx, cx, cy, angle, length, hand) {
-	var x2 = cx + Math.sin(angle) * length;
-	var y2 = cy - Math.cos(angle) * length;
+	var x = cx + Math.sin(angle) * length;
+	var y = cy - Math.cos(angle) * length;
 	
 	chooseWidth(ctx, hand);
 	ctx.strokeStyle = "red";
 	ctx.beginPath();
 	ctx.moveTo(cx, cy);
-	ctx.lineTo(x2, y2);
+	ctx.lineTo(x, y);
 	ctx.stroke();
 	
 	if (hand === "hour") {
@@ -29,20 +29,20 @@ function drawHand(ctx, cx, cy, angle, length, hand) {
 		ctx.strokeStyle = "black";
 		ctx.beginPath();
 		ctx.moveTo(cx, cy);
-		ctx.lineTo(x2, y2);
+		ctx.lineTo(x, y);
 		ctx.stroke();
 	}
 }
 
-function drawTick(ctx, x2, y2, angle, length, color) {
-	var x1 = x2 - Math.sin(angle) * length;
-	var y1 = y2 + Math.cos(angle) * length;
+function drawTick(ctx, ex, ey, angle, length, color) {
+	var x = ex - Math.sin(angle) * length;
+	var y = ey + Math.cos(angle) * length;
 	
 	ctx.lineWidth = 4;
 	ctx.strokeStyle = color;
 	ctx.beginPath();
-	ctx.moveTo(x2, y2);
-	ctx.lineTo(x1, y1);
+	ctx.moveTo(ex, ey);
+	ctx.lineTo(x, y);
 	ctx.stroke();
 }
 
