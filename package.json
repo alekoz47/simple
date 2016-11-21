@@ -17,7 +17,6 @@
         ],
         "uuid": "00ff2603-d660-4514-aa47-4077d17604ad",
         "watchapp": {
-            "hiddenApp": true,
             "watchface": true
         }
     },
