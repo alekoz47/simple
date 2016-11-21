@@ -1,16 +1,10 @@
 
-// basic analog pebble watchface
+//basic analog pebble watchface
 
 //================================
 //Require:
 
 var rocky = require("rocky");
-var months = ["January", "February",
-			  "March", "April",
-			  "May", "June",
-			  "July", "August",
-			  "September", "October",
-			  "November", "December"];
 
 //================================
 //Functions:
@@ -19,26 +13,49 @@ function fractionToRadian(fraction) {
 	return fraction * 2 * Math.PI;
 }
 
-function drawHand(ctx, cx, cy, angle, length, color, hand) {
+function drawHand(ctx, cx, cy, angle, length, hand) {
 	var x2 = cx + Math.sin(angle) * length;
 	var y2 = cy - Math.cos(angle) * length;
+	
 	chooseWidth(ctx, hand);
-	ctx.strokeStyle = color;
+	ctx.strokeStyle = "red";
 	ctx.beginPath();
 	ctx.moveTo(cx, cy);
 	ctx.lineTo(x2, y2);
 	ctx.stroke();
+	
+	if (hand === "hour") {
+		ctx.lineWidth = 2;
+		ctx.strokeStyle = "black";
+		ctx.beginPath();
+		ctx.moveTo(cx, cy);
+		ctx.lineTo(x2, y2);
+		ctx.stroke();
+	}
 }
 
 function drawTick(ctx, x2, y2, angle, length, color) {
-	ctx.lineWidth = 4;
-	ctx.strokeStyle = color;
 	var x1 = x2 - Math.sin(angle) * length;
 	var y1 = y2 + Math.cos(angle) * length;
+	
+	ctx.lineWidth = 4;
+	ctx.strokeStyle = color;
 	ctx.beginPath();
 	ctx.moveTo(x2, y2);
 	ctx.lineTo(x1, y1);
 	ctx.stroke();
+}
+
+function drawText(ctx, cx, date, length) {
+	ctx.fillStyle = "white";
+	ctx.textAlign = "center";
+	ctx.font = "28px Droid";
+	ctx.fillText(date.getDate().toString(), cx, length);
+}
+
+function drawCenter(ctx, cx, cy) {
+	ctx.fillStyle = "red";
+	ctx.rockyFillRadial(cx, cy, 0, 4, 0, 2 * Math.PI);
 }
 
 function chooseWidth(ctx, hand) {
@@ -58,29 +75,40 @@ function chooseWidth(ctx, hand) {
 rocky.on("draw", function(event) {
 	var ctx = event.context;
 	var d = new Date();
-	var dateString =  d.getDate().toString() + " " + months[d.getMonth()] + " " + d.getFullYear().toString();
 	var w = ctx.canvas.unobstructedWidth;
 	var h = ctx.canvas.unobstructedHeight;
-	var cx = w / 2;
-	var cy = h / 2;
 	var maxLength = (Math.min(w, h) - 20) / 2;
 	var minuteFraction = (d.getMinutes()) / 60;
 	var minuteAngle = fractionToRadian(minuteFraction);
 	var hourFraction = (d.getHours() % 12 + minuteFraction) / 12;
 	var hourAngle = fractionToRadian(hourFraction);
+	
 	ctx.clearRect(0, 0, ctx.canvas.clientWidth, ctx.canvas.clientHeight);
-	ctx.fillStyle = "white";
-	ctx.textAlign = "center";
-	ctx.font = "14px Arial";
-	ctx.fillText(dateString, w / 2, h / 2);
-	drawHand(ctx, cx, cy, minuteAngle, maxLength, "red", "minute");
-	drawHand(ctx, cx, cy, hourAngle, maxLength * 0.6, "red", "hour");
-	for (var ii = 0; ii < 360; ii += 30) {
-		var jj = fractionToRadian(ii / 360);
-		var x2 = cx + Math.sin(jj) * maxLength;
-		var y2 = cx - Math.cos(jj) * maxLength;
-		drawTick(ctx, x2, y2, jj, maxLength * 0.1, "darkgrey");
+	
+	var cx = w / 2;
+	var cy = h / 2;
+	
+	var x = 0;
+	var y = 0;
+	var angle = 0;
+	for (var ii = 0; ii < 360; ii += 10) {
+		angle = fractionToRadian(ii / 360);
+		x = cx + Math.sin(angle) * maxLength;
+		y = cy - Math.cos(angle) * maxLength;
+		if (ii % 30 === 0) {
+			drawTick(ctx, x, y, angle, maxLength * 0.1, "lightgrey");
+		} else {
+			drawTick(ctx, x, y, angle, maxLength * 0.05, "darkgrey");
+		}
 	}
+	
+	drawText(ctx, cx, d, maxLength * 0.3);
+	
+	drawHand(ctx, cx, cy, minuteAngle, maxLength - 10, "minute");
+	
+	drawHand(ctx, cx, cy, hourAngle, maxLength * 0.6, "hour");
+	
+	drawCenter(ctx, cx, cy);
 });
 
 rocky.on("minutechange", function(event) {
