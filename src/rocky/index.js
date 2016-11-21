@@ -104,7 +104,7 @@ rocky.on("draw", function(event) {
 	
 	drawText(ctx, cx, d, maxLength * 0.3);
 	
-	drawHand(ctx, cx, cy, minuteAngle, maxLength - 10, "minute");
+	drawHand(ctx, cx, cy, minuteAngle, maxLength * 0.9, "minute");
 	
 	drawHand(ctx, cx, cy, hourAngle, maxLength * 0.6, "hour");
 	
