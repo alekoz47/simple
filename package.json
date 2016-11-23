@@ -15,7 +15,6 @@
         "targetPlatforms": [
             "basalt",
             "chalk",
-            "diorite",
             "emery"
         ],
         "uuid": "00ff2603-d660-4514-aa47-4077d17604ad",
@@ -23,5 +22,5 @@
             "watchface": true
         }
     },
-    "version": "2.1.0"
+    "version": "2.21.0"
 }
