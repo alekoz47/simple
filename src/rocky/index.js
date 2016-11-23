@@ -88,13 +88,11 @@ rocky.on("draw", function(event) {
 	var cx = w / 2;
 	var cy = h / 2;
 	
-	var x = 0;
-	var y = 0;
 	var angle = 0;
 	for (var ii = 0; ii < 360; ii += 10) {
 		angle = fractionToRadian(ii / 360);
-		x = cx + Math.sin(angle) * maxLength;
-		y = cy - Math.cos(angle) * maxLength;
+		var x = cx + Math.sin(angle) * maxLength;
+		var y = cy - Math.cos(angle) * maxLength;
 		if (ii % 30 === 0) {
 			drawTick(ctx, x, y, angle, maxLength * 0.1, "lightgrey");
 		} else {
