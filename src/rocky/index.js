@@ -46,11 +46,11 @@ function drawTick(ctx, ex, ey, angle, length, color) {
 	ctx.stroke();
 }
 
-function drawText(ctx, cx, date, length) {
+function drawText(ctx, x, y, date) {
 	ctx.fillStyle = "white";
 	ctx.textAlign = "center";
 	ctx.font = "18px bold Gothic";
-	ctx.fillText(date.getDate().toString(), cx, length);
+	ctx.fillText(date.getDate().toString(), x, y);
 }
 
 function drawCenter(ctx, cx, cy) {
@@ -66,6 +66,8 @@ rocky.on("draw", function(event) {
 	var d = new Date();
 	var w = ctx.canvas.unobstructedWidth;
 	var h = ctx.canvas.unobstructedHeight;
+	var cx = w / 2;
+	var cy = h / 2;
 	var maxLength = (Math.min(w, h) - 20) / 2;
 	var minuteFraction = (d.getMinutes()) / 60;
 	var minuteAngle = fractionToRadian(minuteFraction);
@@ -73,9 +75,6 @@ rocky.on("draw", function(event) {
 	var hourAngle = fractionToRadian(hourFraction);
 	
 	ctx.clearRect(0, 0, ctx.canvas.clientWidth, ctx.canvas.clientHeight);
-	
-	var cx = w / 2;
-	var cy = h / 2;
 	
 	for (var ii = 0; ii < 360; ii += 10) {
 		var angle = fractionToRadian(ii / 360);
@@ -88,7 +87,7 @@ rocky.on("draw", function(event) {
 		}
 	}
 	
-	drawText(ctx, cx, d, maxLength * 0.3);
+	drawText(ctx, cx, maxLength * 0.4, d);
 	
 	drawHand(ctx, cx, cy, minuteAngle, maxLength * 0.8, 6);
 	
