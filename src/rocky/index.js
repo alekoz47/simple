@@ -1,6 +1,3 @@
-
-//basic analog pebble watchface
-
 //================================
 //Require:
 
@@ -46,11 +43,11 @@ function drawTick(ctx, ex, ey, angle, length, color) {
 	ctx.stroke();
 }
 
-function drawText(ctx, x, y, date) {
+function drawText(ctx, x, y, text) {
 	ctx.fillStyle = "white";
 	ctx.textAlign = "center";
 	ctx.font = "18px bold Gothic";
-	ctx.fillText(date.getDate().toString(), x, y);
+	ctx.fillText(text, x, y);
 }
 
 function drawCenter(ctx, cx, cy) {
@@ -68,7 +65,7 @@ rocky.on("draw", function(event) {
 	var h = ctx.canvas.unobstructedHeight;
 	var cx = w / 2;
 	var cy = h / 2;
-	var maxLength = (Math.min(w, h) - 20) / 2;
+	var maxLength = (Math.min(w, h) - 10) / 2;
 	var minuteFraction = (d.getMinutes()) / 60;
 	var minuteAngle = fractionToRadian(minuteFraction);
 	var hourFraction = (d.getHours() % 12 + minuteFraction) / 12;
@@ -87,7 +84,7 @@ rocky.on("draw", function(event) {
 		}
 	}
 	
-	drawText(ctx, cx, maxLength * 0.4, d);
+	drawText(ctx, cx, maxLength * 0.4, d.getDate().toString());
 	
 	drawHand(ctx, cx, cy, minuteAngle, maxLength * 0.8, 6);
 	
