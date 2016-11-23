@@ -13,18 +13,18 @@ function fractionToRadian(fraction) {
 	return fraction * 2 * Math.PI;
 }
 
-function drawHand(ctx, cx, cy, angle, length, hand) {
+function drawHand(ctx, cx, cy, angle, length, width) {
 	var x = cx + Math.sin(angle) * length;
 	var y = cy - Math.cos(angle) * length;
 	
-	chooseWidth(ctx, hand);
+	ctx.lineWidth = width;
 	ctx.strokeStyle = "red";
 	ctx.beginPath();
 	ctx.moveTo(cx, cy);
 	ctx.lineTo(x, y);
 	ctx.stroke();
 	
-	if (hand === "hour") {
+	if (width === 8) {
 		ctx.lineWidth = 2;
 		ctx.strokeStyle = "black";
 		ctx.beginPath();
@@ -58,17 +58,6 @@ function drawCenter(ctx, cx, cy) {
 	ctx.rockyFillRadial(cx, cy, 0, 4, 0, 2 * Math.PI);
 }
 
-function chooseWidth(ctx, hand) {
-	switch(hand) {
-		case "minute":
-			ctx.lineWidth = 6;
-			break;
-		case "hour":
-			ctx.lineWidth = 8;
-			break;
-	}
-}
-
 //================================
 //Run:
 
@@ -88,9 +77,8 @@ rocky.on("draw", function(event) {
 	var cx = w / 2;
 	var cy = h / 2;
 	
-	var angle = 0;
 	for (var ii = 0; ii < 360; ii += 10) {
-		angle = fractionToRadian(ii / 360);
+		var angle = fractionToRadian(ii / 360);
 		var x = cx + Math.sin(angle) * maxLength;
 		var y = cy - Math.cos(angle) * maxLength;
 		if (ii % 30 === 0) {
@@ -102,9 +90,9 @@ rocky.on("draw", function(event) {
 	
 	drawText(ctx, cx, d, maxLength * 0.3);
 	
-	drawHand(ctx, cx, cy, minuteAngle, maxLength * 0.8, "minute");
+	drawHand(ctx, cx, cy, minuteAngle, maxLength * 0.8, 6);
 	
-	drawHand(ctx, cx, cy, hourAngle, maxLength * 0.5, "hour");
+	drawHand(ctx, cx, cy, hourAngle, maxLength * 0.5, 8);
 	
 	drawCenter(ctx, cx, cy);
 });
