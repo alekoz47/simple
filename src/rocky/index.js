@@ -44,7 +44,7 @@ function drawTick(ctx, ex, ey, angle, length, color) {
 
 function drawText(ctx, x, y, text) {
 	ctx.fillStyle = "white";
-	ctx.textAlign = "center";
+	ctx.textAlign = "left";
 	ctx.font = "18px bold Gothic";
 	ctx.fillText(text, x, y);
 }
@@ -82,13 +82,9 @@ rocky.on("draw", function(event) {
 			drawTick(ctx, x, y, angle, maxLength * 0.05, "darkgrey");
 		}
 	}
-	
-	drawText(ctx, cx, maxLength * 0.4, d.getDate().toString());
-	
+	drawText(ctx, w - 45, cy - 14, d.getDate().toString());
 	drawHand(ctx, cx, cy, minuteAngle, maxLength * 0.8, 7);
-	
 	drawHand(ctx, cx, cy, hourAngle, maxLength * 0.5, 10);
-	
 	drawCenter(ctx, cx, cy);
 });
 
