@@ -11,24 +11,25 @@ function fractionToRadian(fraction) {
 	return fraction * 2 * Math.PI;
 }
 
+function drawLine(ctx, x1, y1, x2, y2) {
+	ctx.beginPath();
+	ctx.moveTo(x1, y1);
+	ctx.lineTo(x2, y2);
+	ctx.stroke();
+}
+
 function drawHand(ctx, cx, cy, angle, length, width) {
 	var x = cx + Math.sin(angle) * length;
 	var y = cy - Math.cos(angle) * length;
 	
 	ctx.lineWidth = width;
 	ctx.strokeStyle = handColor;
-	ctx.beginPath();
-	ctx.moveTo(cx, cy);
-	ctx.lineTo(x, y);
-	ctx.stroke();
+	drawLine(ctx, cx, cy, x, y);
 	
 	if (width === 10) {
 		ctx.lineWidth = 3;
 		ctx.strokeStyle = "black";
-		ctx.beginPath();
-		ctx.moveTo(cx, cy);
-		ctx.lineTo(x, y);
-		ctx.stroke();
+		drawLine(ctx, cx, cy, x, y);
 	}
 }
 
@@ -38,10 +39,7 @@ function drawTick(ctx, ex, ey, angle, length, color) {
 	
 	ctx.lineWidth = 5;
 	ctx.strokeStyle = color;
-	ctx.beginPath();
-	ctx.moveTo(ex, ey);
-	ctx.lineTo(x, y);
-	ctx.stroke();
+	drawLine(ctx, ex, ey, x, y);
 }
 
 function drawText(ctx, x, y, text) {
