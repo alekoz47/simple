@@ -22,8 +22,8 @@ function drawHand(ctx, cx, cy, angle, length, width) {
 	ctx.lineTo(x, y);
 	ctx.stroke();
 	
-	if (width === 8) {
-		ctx.lineWidth = 2;
+	if (width === 10) {
+		ctx.lineWidth = 3;
 		ctx.strokeStyle = "black";
 		ctx.beginPath();
 		ctx.moveTo(cx, cy);
@@ -36,7 +36,7 @@ function drawTick(ctx, ex, ey, angle, length, color) {
 	var x = ex - Math.sin(angle) * length;
 	var y = ey + Math.cos(angle) * length;
 	
-	ctx.lineWidth = 4;
+	ctx.lineWidth = 5;
 	ctx.strokeStyle = color;
 	ctx.beginPath();
 	ctx.moveTo(ex, ey);
@@ -87,9 +87,9 @@ rocky.on("draw", function(event) {
 	
 	drawText(ctx, cx, maxLength * 0.4, d.getDate().toString());
 	
-	drawHand(ctx, cx, cy, minuteAngle, maxLength * 0.8, 6);
+	drawHand(ctx, cx, cy, minuteAngle, maxLength * 0.8, 7);
 	
-	drawHand(ctx, cx, cy, hourAngle, maxLength * 0.5, 8);
+	drawHand(ctx, cx, cy, hourAngle, maxLength * 0.5, 10);
 	
 	drawCenter(ctx, cx, cy);
 });
