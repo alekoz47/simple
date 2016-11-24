@@ -1,7 +1,8 @@
 //================================
-//Require:
+//Variables:
 
 var rocky = require("rocky");
+var handColor = "blue";
 
 //================================
 //Functions:
@@ -15,7 +16,7 @@ function drawHand(ctx, cx, cy, angle, length, width) {
 	var y = cy - Math.cos(angle) * length;
 	
 	ctx.lineWidth = width;
-	ctx.strokeStyle = "red";
+	ctx.strokeStyle = handColor;
 	ctx.beginPath();
 	ctx.moveTo(cx, cy);
 	ctx.lineTo(x, y);
@@ -51,7 +52,7 @@ function drawText(ctx, x, y, text) {
 }
 
 function drawCenter(ctx, cx, cy) {
-	ctx.fillStyle = "red";
+	ctx.fillStyle = handColor;
 	ctx.rockyFillRadial(cx, cy, 0, 4, 0, 2 * Math.PI);
 }
 
