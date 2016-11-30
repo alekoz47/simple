@@ -2,7 +2,7 @@
 //Variables:
 
 var rocky = require("rocky");
-var handColor = "blue";
+var handColor = "red";
 
 //================================
 //Functions:
