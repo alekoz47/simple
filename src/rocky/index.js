@@ -82,7 +82,7 @@ rocky.on("draw", function(event) {
 			drawTick(ctx, x, y, angle, maxLength * 0.05, "darkgrey");
 		}
 	}
-	drawText(ctx, w - 45, cy - 14, d.getDate().toString());
+	drawText(ctx, w - 45, cy - ctx.measureText("0").height, d.getDate().toString());
 	drawHand(ctx, cx, cy, minuteAngle, maxLength * 0.8, 7);
 	drawHand(ctx, cx, cy, hourAngle, maxLength * 0.5, 10);
 	drawCenter(ctx, cx, cy);
