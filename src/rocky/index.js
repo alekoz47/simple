@@ -37,7 +37,7 @@ function drawTick(ctx, ex, ey, angle, length, color) {
 	var x = ex - Math.sin(angle) * length;
 	var y = ey + Math.cos(angle) * length;
 	
-	ctx.lineWidth = 5;
+	ctx.lineWidth = 4;
 	ctx.strokeStyle = color;
 	drawLine(ctx, ex, ey, x, y);
 }
@@ -72,7 +72,7 @@ rocky.on("draw", function(event) {
 	
 	ctx.clearRect(0, 0, ctx.canvas.clientWidth, ctx.canvas.clientHeight);
 	
-	for (var ii = 0; ii < 360; ii += 10) {
+	for (var ii = 0; ii < 360; ii += 6) {
 		var angle = fractionToRadian(ii / 360);
 		var x = cx + Math.sin(angle) * maxLength;
 		var y = cy - Math.cos(angle) * maxLength;
